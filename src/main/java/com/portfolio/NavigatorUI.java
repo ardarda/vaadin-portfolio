@@ -10,15 +10,7 @@ import com.vaadin.ui.*;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * This UI is the application entry point. A UI may either represent a browser window 
- * (or tab) or some part of an HTML page where a Vaadin application is embedded.
- * <p>
- * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be 
- * overridden to add component to the user interface and initialize non-component functionality.
- */
 @SpringUI
 @Theme("mytheme")
 public class NavigatorUI extends UI {
@@ -57,7 +49,7 @@ public class NavigatorUI extends UI {
 
         @Override
         public void enter(ViewChangeListener.ViewChangeEvent event) {
-            Notification.show("Welcome to crypto portfolio");
+//            Notification.show("Welcome to crypto portfolio");
         }
     }
 
@@ -133,7 +125,8 @@ public class NavigatorUI extends UI {
             done.setIcon(VaadinIcons.CHECK);
             done.addClickListener(clickEvent -> {
                 portfolioService.save(new Portfolio(newPortfolio.textFieldTitle()));
-                populateWithPortfolios(); });
+                populateWithPortfolios();
+            });
             portfoliosContent.addComponent(done);
         }
 
