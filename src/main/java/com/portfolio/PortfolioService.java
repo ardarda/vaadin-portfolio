@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -11,14 +12,30 @@ import java.util.List;
 public class PortfolioService {
 
     @Autowired
-    PortfolioRepository repository;
+    PortfolioRepository portfolioRepository;
+
+    @Autowired
+    CryptoInvestmentRespository cryptoInvestmentRespository;
+
+    @Autowired
+    CryptoCurrencyRepository cryptoCurrencyRepository;
 
     @Transactional
-    public Portfolio save(Portfolio portfolio) {
-        return repository.save(portfolio);
+    public Portfolio savePortfolio(Portfolio portfolio) {
+        return portfolioRepository.save(portfolio);
     }
 
-    public List<Portfolio> findAll() {
-        return repository.findAll();
+    public List<Portfolio> findAllPortfolios() {
+        return portfolioRepository.findAll();
     }
+
+    public List<CryptoCurrency> findAllCryptoCurrencies() {
+        return cryptoCurrencyRepository.findAll();
+    }
+
+    @Transactional
+    public CryptoInvestment saveCryptoInvestment(CryptoInvestment investment) {
+        return cryptoInvestmentRespository.save(investment);
+    }
+
 }

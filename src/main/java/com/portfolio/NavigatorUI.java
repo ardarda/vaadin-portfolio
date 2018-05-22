@@ -11,11 +11,16 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @SpringUI
 @Theme("mytheme")
 public class NavigatorUI extends UI {
     Navigator navigator;
+    Portfolio selectedPortfolio;
+
     protected static final String MAINVIEW = "main";
+    protected static final String PORTFOLIOVIEW = "portfolio";
 
     @Autowired
     PortfolioService portfolioService;
@@ -29,7 +34,43 @@ public class NavigatorUI extends UI {
         // Create and register the views
         navigator.addView("", new StartView());
         navigator.addView(MAINVIEW, new MainView());
+        navigator.addView(PORTFOLIOVIEW, new PortfolioView());
     }
+
+    /** A detail view for one portfolio */
+    public class PortfolioView extends VerticalLayout implements View {
+        public PortfolioView () {
+            setSizeFull();
+            Portfolio portfolio = portfolioService.findAllPortfolios().get(1);
+            // portfolio title label
+            Label title = new Label(portfolio.getTitle());
+            title.addStyleName(ValoTheme.LABEL_H2);
+            addComponent(title);
+
+            // profit status of the investments
+            HorizontalLayout profitStatusContainer = new HorizontalLayout();
+
+            Label profitStatus = new Label();
+
+            List<CryptoInvestment> col = portfolio.getCryptoInvestments();
+            int a = 5;
+
+            col.forEach(cryptoInvestment -> {
+                CryptoCurrency curInvested = cryptoInvestment.getInvestedCoin();
+                CryptoCurrency curInvestment = cryptoInvestment.getInvestmentCoin();
+                int ay = 5;
+
+
+            });
+
+        }
+
+        @Override
+        public void enter(ViewChangeListener.ViewChangeEvent event) {
+
+        }
+    }
+
 
     /** A start view for navigating to the main view */
     public class StartView extends VerticalLayout implements View {
@@ -124,7 +165,7 @@ public class NavigatorUI extends UI {
             Button done = new Button();
             done.setIcon(VaadinIcons.CHECK);
             done.addClickListener(clickEvent -> {
-                portfolioService.save(new Portfolio(newPortfolio.textFieldTitle()));
+                portfolioService.savePortfolio(new Portfolio(newPortfolio.textFieldTitle()));
                 populateWithPortfolios();
             });
             portfoliosContent.addComponent(done);
@@ -134,8 +175,9 @@ public class NavigatorUI extends UI {
             portfoliosContent.removeAllComponents();
             portfoliosContent.addComponent(new Label("Porfolios area to be populated"));
             PortfoliosLayout portfolios = new PortfoliosLayout();
-            portfolios.config(portfolioService.findAll());
+            portfolios.config(portfolioService.findAllPortfolios(), portfolioService);
             portfoliosContent.addComponent(portfolios);
         }
+
     }
 }

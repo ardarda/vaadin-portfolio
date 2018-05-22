@@ -1,10 +1,6 @@
 package com.portfolio;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
-import java.util.Currency;
 
 @Entity
 public class CryptoCurrency {
@@ -15,14 +11,40 @@ public class CryptoCurrency {
 
     private String symbol;
 
-    private Double valueInBTC;
+    private Float valueInBtc;
 
-    protected Double valueInUSD;
+    protected Float valueInUsd;
 
-    public CryptoCurrency(String symbol, Double valueInBTC, Double valueInUSD) {
+    public CryptoCurrency(String symbol, Float valueInBTC, Float valueInUSD) {
 
         this.symbol = symbol;
-        this.valueInUSD = valueInUSD;
-        this.valueInBTC = valueInBTC;
+        this.valueInUsd = valueInUSD;
+        this.valueInBtc = valueInBTC;
+    }
+
+    public CryptoCurrency() {}
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public float getValueInBtc() {
+        return valueInBtc;
+    }
+
+    public void setValueInBtc(Float valueInBtc) {
+        this.valueInBtc = valueInBtc;
+    }
+
+    public float getValueInUsd() {
+        return valueInUsd;
+    }
+
+    public void setValueInUsd(Float valueInUsd) {
+        this.valueInUsd = valueInUsd;
     }
 }
