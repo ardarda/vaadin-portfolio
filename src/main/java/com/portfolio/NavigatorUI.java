@@ -11,8 +11,6 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
 @SpringUI
 @Theme("mytheme")
 public class NavigatorUI extends UI {
@@ -48,20 +46,7 @@ public class NavigatorUI extends UI {
             addComponent(title);
 
             // profit status of the investments
-            HorizontalLayout profitStatusContainer = new HorizontalLayout();
-
-            Label profitStatus = new Label();
-
-            List<CryptoInvestment> col = portfolio.getCryptoInvestments();
-            int a = 5;
-
-            col.forEach(cryptoInvestment -> {
-                CryptoCurrency curInvested = cryptoInvestment.getInvestedCoin();
-                CryptoCurrency curInvestment = cryptoInvestment.getInvestmentCoin();
-                int ay = 5;
-
-
-            });
+            // to be implemented
 
         }
 
@@ -173,7 +158,6 @@ public class NavigatorUI extends UI {
 
         private void populateWithPortfolios() {
             portfoliosContent.removeAllComponents();
-            portfoliosContent.addComponent(new Label("Porfolios area to be populated"));
             PortfoliosLayout portfolios = new PortfoliosLayout();
             portfolios.config(portfolioService.findAllPortfolios(), portfolioService);
             portfoliosContent.addComponent(portfolios);

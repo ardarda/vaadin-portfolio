@@ -1,11 +1,8 @@
 package com.portfolio;
 
 import com.vaadin.icons.VaadinIcons;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.shared.Registration;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +48,7 @@ public class PortfoliosLayout extends VerticalLayout {
             portfoliosLayout.addComponent(portfolioButton);
 
             portfolioButton.addClickListener(clickEvent -> {
+                addNewInvestmentLayout.removeAllComponents();
                 updatePortfolioDetailLayout(portfolio);
             });
 
@@ -80,7 +78,6 @@ public class PortfoliosLayout extends VerticalLayout {
 
             Label investmentTitle = new Label(investedCoinSym + investmentCoinSym);
             Label amountsSentence = new Label("invested " + investedCoinAmount + " " + investedCoinSym + " in " + investmentCoinAmount + " " + investmentCoinSym);
-
 
             investmentTitle.addStyleName(ValoTheme.LABEL_COLORED);
 

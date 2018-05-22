@@ -1,9 +1,6 @@
 package com.portfolio;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
-import javax.sound.sampled.Port;
 
 @Entity
 public class CryptoInvestment implements Investment {
